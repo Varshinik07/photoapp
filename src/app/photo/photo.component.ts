@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-photo',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) {
+    this.fetchData()
+   }
 
-  photoData=[]
+  fetchData=()=>{
+    this.myapi.viewphotoData().subscribe(
+        (data)=>{
+          this.photoData=data
+        }
+      )
+    }
+
+  photoData:any=[]
+  
   ngOnInit(): void {
   }
 
